@@ -1,0 +1,14 @@
+{
+  "name": "suitbro-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Suit Bro — personal site for Abdul Fatah, real estate agent, Dubai UAE.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED"
+}

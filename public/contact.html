@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Suit Bro | Abdul Fatah</title>
+<meta name="description" content="Get in touch with Abdul Fatah about buying, selling or investing in Dubai property.">
+<meta name="theme-color" content="#000000">
+<meta property="og:title" content="Contact — Suit Bro | Abdul Fatah">
+<meta property="og:description" content="Get in touch with Abdul Fatah about buying, selling or investing in Dubai property.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%23FFA800' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="shell">
+    <a class="wordmark" href="index.html">Suit<span>&nbsp;Bro</span></a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav" aria-label="Menu"><span></span></button>
+    <nav class="nav" id="primaryNav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="listings.html">Listings</a>
+      <a href="track-record.html">Track Record</a>
+      <a href="market-insights.html">Market Insights</a>
+      <a href="clients.html">Clients</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" style="padding-block:clamp(64px,9vw,120px) clamp(40px,5vw,64px);">
+  <div class="shell">
+    <p class="eyebrow">Contact</p>
+    <h1>Let's <em>talk</em>.</h1>
+    <p class="lede" style="margin-top:1.4rem;">Call, message, or send the brief below. I answer my own phone.</p>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="shell">
+    <div class="grid grid-2" style="align-items:start;gap:clamp(36px,6vw,72px);">
+      <div>
+        <h2 style="font-size:clamp(1.5rem,2.6vw,2rem);margin-bottom:1.8rem;">Direct</h2>
+        <ul class="contact-list">
+          <li><span class="k">Phone</span><span class="v"><a href="tel:+971557726097">+971 55 772 6097</a></span></li>
+          <li><span class="k">WhatsApp</span><span class="v"><a href="https://wa.me/971557726097" target="_blank" rel="noopener">Message on WhatsApp</a></span></li>
+          <!-- PLACEHOLDER: email address is a placeholder — replace with the real one -->
+          <li><span class="k">Email</span><span class="v"><a href="mailto:hello@suitbro.ae">hello@suitbro.ae</a></span></li>
+          <li><span class="k">Coverage</span><span class="v">All areas &mdash; Dubai, UAE</span></li>
+          <li><span class="k">Hours</span><span class="v">Sun&ndash;Thu 9:00&ndash;19:00 &middot; Fri&ndash;Sat by appointment</span></li>
+        </ul>
+        <div class="btn-row"><a class="btn" href="tel:+971557726097">Book a call</a></div>
+      </div>
+
+      <div>
+        <h2 style="font-size:clamp(1.5rem,2.6vw,2rem);margin-bottom:1.8rem;">Send the brief</h2>
+        <!-- PLACEHOLDER: this form does not deliver anywhere yet. To make it live, point the
+             action at a Formspree (or similar) endpoint and remove the inline handler below. -->
+        <form id="briefForm" class="form-grid" novalidate>
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="intent">I'm looking to</label>
+            <select id="intent" name="intent">
+              <option>Buy</option>
+              <option>Sell</option>
+              <option>Invest</option>
+              <option>Rent out a property</option>
+              <option>Just exploring</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="budget">Budget or area (optional)</label>
+            <input type="text" id="budget" name="budget" placeholder="e.g. AED 1.5M, JVC or Business Bay">
+          </div>
+          <div class="field full">
+            <label for="message">The brief</label>
+            <textarea id="message" name="message" placeholder="What you're after, your timeline, and anything that would rule a property out."></textarea>
+          </div>
+          <div class="field full">
+            <button class="btn" type="submit">Send</button>
+          </div>
+        </form>
+        <div class="form-status" id="formStatus" hidden></div>
+        <p class="form-note">Prefer to talk? <a href="tel:+971557726097">+971 55 772 6097</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var form = document.getElementById('briefForm');
+  var status = document.getElementById('formStatus');
+  if (!form || !status) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = form.querySelector('#name');
+    var email = form.querySelector('#email');
+    if (!name.value.trim() || !email.value.trim()) {
+      status.hidden = false;
+      status.textContent = 'Please add your name and email so I can get back to you.';
+      return;
+    }
+    status.hidden = false;
+    status.innerHTML = 'Thanks &mdash; message noted. <strong>Note:</strong> this form is not connected to a mailbox yet, so for anything urgent please call <a href="tel:+971557726097">+971 55 772 6097</a> or message on WhatsApp.';
+  });
+})();
+</script>
+</main>
+
+<footer class="site-foot">
+  <div class="shell">
+    <div class="foot-grid">
+      <div>
+        <a class="wordmark" href="index.html">Suit<span>&nbsp;Bro</span></a>
+        <p class="muted" style="margin-top:.9rem;font-size:.9rem;max-width:34ch;">Abdul Fatah — real estate in Dubai. Buying, selling, investing.</p>
+      </div>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="listings.html">Listings</a>
+        <a href="track-record.html">Track Record</a>
+        <a href="market-insights.html">Market Insights</a>
+        <a href="clients.html">Clients</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 Abdul Fatah &middot; Suit Bro</span>
+      <span><a href="tel:+971557726097">+971 55 772 6097</a> &middot; <a href="mailto:hello@suitbro.ae">hello@suitbro.ae</a></span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/971557726097" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23a8.23 8.23 0 0 1 .01 16.47Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.16 0-.43.06-.65.31-.22.25-.85.83-.85 2.03s.87 2.35.99 2.51c.12.17 1.72 2.62 4.16 3.68.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+</a>
+
+<script>
+(function () {
+  var btn = document.getElementById('navToggle');
+  var nav = document.getElementById('primaryNav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function () {
+    var open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+})();
+</script>
+</body>
+</html>
