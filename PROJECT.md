@@ -126,7 +126,7 @@ strings to find everything that still needs a real answer.
 | Testimonials | Placeholder | 3 invented quotes |
 | Contact — phone | **Real** | Click-to-call, live |
 | Contact — WhatsApp | **Assumed** | `wa.me` link built from the real mobile — confirm that number has WhatsApp |
-| Contact — email | Placeholder | `hello@suitbro.ae` is invented |
+| Contact — email | Pending | `hello@suitbro.ae` — becomes real once the domain is bought and a mailbox exists |
 | Contact form | Not wired | Validates and confirms on screen, but delivers nowhere yet |
 
 ### Real listings currently live
@@ -170,7 +170,7 @@ These are a snapshot, not a live feed — the numbers are written into the HTML.
 - [ ] Confirm exact listing taglines (source screenshot was cropped)
 - [ ] Past closed deals for the track record page
 - [ ] 2–3 real client testimonials
-- [ ] Real email address
+- [ ] Buy `suitbro.ae` and set up the `hello@` mailbox
 - [ ] Confirm +971 55 772 6097 is on WhatsApp (the floating button assumes it is)
 - [ ] Bio background — how you got into Dubai real estate
 - [ ] Real figures for the stat blocks (deals, transaction value, years, referral rate)
@@ -187,6 +187,21 @@ These are a snapshot, not a live feed — the numbers are written into the HTML.
 
 ---
 
+## Domain
+
+**suitbro.ae** — chosen for the brand over the personal name (it is the half people
+repeat), and `.ae` over `.com` for local credibility in the Dubai market.
+
+The site is already wired for it: canonical tags and `og:url` on all seven pages,
+plus `sitemap.xml` and `robots.txt`. See the README for the Railway + DNS steps.
+Note `.ae` may require a UAE trade licence at registration — the registrar will say
+at checkout.
+
+Serve the bare apex, not `www` — the canonical tags name `suitbro.ae`, so redirect
+`www` to it rather than serving the same pages twice.
+
+---
+
 ## Changelog
 
 **12 Sep 2026** — Initial build. 7-section single-page site, navy/brass palette, Dubai market data section wired up via DXB INTERACT.
@@ -198,3 +213,5 @@ These are a snapshot, not a live feed — the numbers are written into the HTML.
 **12 Sep 2026** — Packaged for deployment: added `server.js` (dependency-free Node static server), `package.json`, `railway.json`, `README.md`. Verified all routes serve correctly. Prepared for GitHub → Railway deploy.
 
 **12 Sep 2026** — Built out and committed to the repo. Closed two of the open gaps: added a working mobile nav (hamburger below 800px — links were previously just hidden) and a floating WhatsApp button. Market Insights re-queried live against DXB INTERACT rather than reusing the written-in figures, and extended with a busiest-areas-by-volume table, sample-size columns on every yield row, and the DLD's own area naming. Server hardened against path traversal and given extension-less URL support. Every placeholder tagged inline with `<!-- PLACEHOLDER: -->` / `<!-- VERIFY: -->` so nothing invented can reach production unnoticed.
+
+**12 Sep 2026** — Wired the site for its own domain, `suitbro.ae`, rather than the generated Railway hostname: canonical URLs and Open Graph tags (`og:url`, `og:site_name`, `og:locale`) on all seven pages, plus `sitemap.xml` and `robots.txt`. Verified both new files serve with the right MIME types. Renamed the default branch to `main`.

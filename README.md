@@ -70,6 +70,35 @@ Each commit is a checkpoint you can roll back to from GitHub's history.
 
 ---
 
+## Custom domain — suitbro.ae
+
+The site is wired for `https://suitbro.ae`: every page carries a `<link rel="canonical">`
+and Open Graph `og:url`, and `public/sitemap.xml` + `public/robots.txt` point there.
+
+To connect it after buying the domain:
+
+1. **Railway** → your service → **Settings → Networking → Custom Domain**
+2. Enter `suitbro.ae`. Railway shows you a DNS target (something like
+   `xxxx.up.railway.app`).
+3. **At your registrar's DNS panel**, add the record Railway asks for:
+   - `www` → **CNAME** → the Railway target
+   - the apex (`suitbro.ae`, sometimes written `@`) → **ALIAS**/**ANAME**, or the
+     **A** record Railway gives you. A plain CNAME is not valid at the apex, so if
+     your registrar offers neither ALIAS nor ANAME, put the site on `www.suitbro.ae`
+     and redirect the apex to it.
+4. Wait for DNS to propagate (minutes to a few hours) — Railway issues the TLS
+   certificate automatically once it resolves.
+
+**If you change the domain**, the URL appears in four places: the `<link rel="canonical">`
+and `og:url` tags in each of the seven pages, plus `sitemap.xml` and `robots.txt`.
+Search and replace `https://suitbro.ae` across `public/`.
+
+**Pick one hostname and stick to it.** Serving the same pages on both `suitbro.ae` and
+`www.suitbro.ae` splits your search ranking between two addresses. The canonical tags
+currently name the bare `suitbro.ae`, so redirect `www` to it rather than serving both.
+
+---
+
 ## Editing notes
 
 **The navigation is repeated in every file.** If you add or rename a page you
