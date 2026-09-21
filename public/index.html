@@ -18,6 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%23FFA800' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
@@ -38,6 +39,7 @@
 </header>
 
 <main>
+
 <section class="hero">
   <div class="shell">
     <div class="hero-grid">
@@ -50,6 +52,7 @@
           <a class="btn" href="tel:+971557726097">Book a call</a>
           <a class="btn btn-ghost" href="listings.html">See listings</a>
         </div>
+        <p class="scroll-cue"><i></i> Scroll</p>
       </div>
       <!-- PLACEHOLDER: portrait — swap this block for <img src="portrait.jpg" alt="Abdul Fatah"> -->
       <div class="portrait"><small>Portrait &mdash; coming soon</small></div>
@@ -57,25 +60,43 @@
   </div>
 </section>
 
+<!-- Live DLD figures. Source: Dubai Land Department, period 23 Jun – 10 Sep 2026. -->
+<div class="ticker" aria-label="Dubai market figures">
+  <div class="ticker-track">
+    <div class="ticker-item"><b>43,666</b><span>Transactions &middot; 11 weeks</span></div>
+    <div class="ticker-item"><b>AED 1.20M</b><span>Citywide median</span></div>
+    <div class="ticker-item"><b>162</b><span>Areas tracked</span></div>
+    <div class="ticker-item"><b>11.82%</b><span>Top gross yield</span></div>
+    <div class="ticker-item"><b>AED 1.71M</b><span>Business Bay median</span></div>
+    <div class="ticker-item"><b>AED 2.54M</b><span>Dubai Marina median</span></div>
+    <div class="ticker-item" aria-hidden="true"><b>43,666</b><span>Transactions &middot; 11 weeks</span></div>
+    <div class="ticker-item" aria-hidden="true"><b>AED 1.20M</b><span>Citywide median</span></div>
+    <div class="ticker-item" aria-hidden="true"><b>162</b><span>Areas tracked</span></div>
+    <div class="ticker-item" aria-hidden="true"><b>11.82%</b><span>Top gross yield</span></div>
+    <div class="ticker-item" aria-hidden="true"><b>AED 1.71M</b><span>Business Bay median</span></div>
+    <div class="ticker-item" aria-hidden="true"><b>AED 2.54M</b><span>Dubai Marina median</span></div>
+  </div>
+</div>
+
 <section class="tone-2">
   <div class="shell">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">How I work</p>
       <h2>Three steps. No wasted time.</h2>
       <p>Most of the work happens before you ever see a property. The viewing is the easy part.</p>
     </div>
-    <div class="grid grid-3">
-      <article class="card">
+    <div class="grid grid-3 steps">
+      <article class="card reveal" style="--d:0ms">
         <span class="num">01</span>
         <h3>The brief</h3>
         <p>Budget, timeline, and what the place is actually for — home, yield, or a hold. Get this wrong and everything after it is wasted effort.</p>
       </article>
-      <article class="card">
+      <article class="card reveal" style="--d:90ms">
         <span class="num">02</span>
         <h3>The shortlist</h3>
         <p>Four or five properties that fit, each with the transaction data behind it. Not forty listings dumped in your inbox.</p>
       </article>
-      <article class="card">
+      <article class="card reveal" style="--d:180ms">
         <span class="num">03</span>
         <h3>The close</h3>
         <p>Negotiation, paperwork, DLD transfer, handover. You get told what's happening before you have to ask.</p>
@@ -86,29 +107,29 @@
 
 <section>
   <div class="shell">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">Snapshot</p>
       <h2>Where things stand.</h2>
     </div>
     <!-- PLACEHOLDER: all four figures are invented — swap for real numbers -->
     <div class="grid grid-4">
-      <div class="stat"><span class="figure">120+</span><span class="label">Deals closed</span></div>
-      <div class="stat"><span class="figure">AED 480M</span><span class="label">Transaction value</span></div>
-      <div class="stat"><span class="figure">8</span><span class="label">Years in Dubai</span></div>
-      <div class="stat"><span class="figure">All</span><span class="label">Areas covered</span></div>
+      <div class="stat reveal" style="--d:0ms"><span class="figure">120+</span><span class="label">Deals closed</span></div>
+      <div class="stat reveal" style="--d:80ms"><span class="figure">AED 480M</span><span class="label">Transaction value</span></div>
+      <div class="stat reveal" style="--d:160ms"><span class="figure">8</span><span class="label">Years in Dubai</span></div>
+      <div class="stat reveal" style="--d:240ms"><span class="figure">All</span><span class="label">Areas covered</span></div>
     </div>
   </div>
 </section>
 
 <section class="tone-2">
   <div class="shell">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">On the market</p>
       <h2>Currently available.</h2>
       <p>Two live listings. Both priced to move — ask me what the comparable units actually sold for.</p>
     </div>
     <div class="grid grid-2">
-      <article class="listing">
+      <article class="listing reveal" style="--d:0ms">
         <div class="listing-media"><small>Photography to follow</small><span class="tag">Townhouse</span></div>
         <div class="listing-body">
           <p class="price">AED 3,400,000</p>
@@ -122,7 +143,7 @@
           </div>
         </div>
       </article>
-      <article class="listing">
+      <article class="listing reveal" style="--d:110ms">
         <div class="listing-media"><small>Photography to follow</small><span class="tag">Apartment</span></div>
         <div class="listing-body">
           <p class="price">AED 1,150,000</p>
@@ -137,16 +158,33 @@
         </div>
       </article>
     </div>
-    <div class="btn-row"><a class="btn btn-ghost" href="listings.html">All listings</a></div>
+    <div class="btn-row reveal"><a class="btn btn-ghost" href="listings.html">All listings</a></div>
   </div>
 </section>
 
 <section>
   <div class="shell">
-    <div class="callout cta-band">
+    <div class="section-head reveal">
+      <p class="eyebrow">The numbers</p>
+      <h2>I price from transfers, not opinions.</h2>
+      <p>Every figure on this site comes out of Dubai Land Department records and Ejari contracts. Here's the city right now.</p>
+    </div>
+    <div class="insight reveal">
+      <div class="stat"><span class="figure">43,666</span><span class="label">Transactions &middot; 11 weeks</span></div>
+      <div class="stat"><span class="figure">AED 1.20M</span><span class="label">Median sale price</span></div>
+      <div class="stat"><span class="figure">162</span><span class="label">Areas tracked</span></div>
+      <div class="stat"><span class="figure">11.82%</span><span class="label">Highest gross yield</span></div>
+    </div>
+    <p class="source-note">Dubai Land Department, 23 June &ndash; 10 September 2026. <a href="market-insights.html">See the full breakdown &rarr;</a></p>
+  </div>
+</section>
+
+<section class="tone-2">
+  <div class="shell">
+    <div class="callout cta-band reveal">
       <p class="eyebrow" style="justify-content:center;">Next step</p>
       <h2>Tell me what you're looking for.</h2>
-      <p class="lede" style="margin-top:1.2rem;">A ten-minute call is usually enough to know whether I can help. If I can't, I'll say so.</p>
+      <p class="lede" style="margin-top:1.3rem;">A ten-minute call is usually enough to know whether I can help. If I can't, I'll say so.</p>
       <div class="btn-row">
         <a class="btn" href="tel:+971557726097">+971 55 772 6097</a>
         <a class="btn btn-ghost" href="contact.html">Send a message</a>
@@ -154,6 +192,7 @@
     </div>
   </div>
 </section>
+
 </main>
 
 <footer class="site-foot">
@@ -188,11 +227,24 @@
 (function () {
   var btn = document.getElementById('navToggle');
   var nav = document.getElementById('primaryNav');
-  if (!btn || !nav) return;
-  btn.addEventListener('click', function () {
-    var open = nav.classList.toggle('open');
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
+  if (btn && nav) {
+    btn.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    for (var i = 0; i < els.length; i++) els[i].classList.add('in');
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+  els.forEach(function (el) { io.observe(el); });
 })();
 </script>
 </body>
