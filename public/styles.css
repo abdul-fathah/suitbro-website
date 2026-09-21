@@ -1166,3 +1166,6 @@ html.intro-skip .intro { animation: introOut .36s var(--ease) forwards !importan
 /* A wide feature photo, and a pair side by side. */
 .photo-feature img { aspect-ratio: 21 / 9; }
 @media (max-width: 760px) { .photo-feature img { aspect-ratio: 4 / 3; } }
+
+/* Portrait-format photograph, for standing shots in a two-up. */
+.photo-tall img { aspect-ratio: 3 / 4; }

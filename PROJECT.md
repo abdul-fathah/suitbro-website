@@ -132,6 +132,7 @@ strings to find everything that still needs a real answer.
 | About bio | Placeholder | Career background and RERA number still needed; brokerage now named |
 | About stats | Placeholder | Deals / transaction value / years — swap for real figures |
 | Portrait photo | **Real** | Two office portraits supplied Sep 2026 — home and About |
+| Event / awards photography | **Real** | Eight images across Home, About, Track Record, Clients, Contact |
 | Listings | **Real (partial)** | Venera + Skyhills are real; photos still placeholder |
 | Track record ledger | Placeholder | 4 invented deals — needs real closings |
 | Market Insights | **Real data** | Live DLD figures, see below |
@@ -237,3 +238,7 @@ Serve the bare apex, not `www` — the canonical tags name `suitbro.ae`, so redi
 **21 Sep 2026** — Fixed the intro not appearing. It had a once-per-browser-session guard that was never asked for; any earlier load in the same tab consumed it, so in practice the animation was invisible. Now plays on every landing-page load, with a tap/key/scroll to skip and a slightly tighter 2.7s timeline.
 
 **21 Sep 2026** — Added real photography. Five supplied images resized and re-encoded for web (3.6MB of originals down to 732KB): two office portraits now carry the home and About heroes in place of the gradient blocks, the Emaar Quarter 2 Broker Awards photo anchors a new Recognition section on Track Record, and two event photographs sit on Clients. Photos get a warm tint and a dark foot so they sit in the palette and overlaid type stays readable. Brokerage identified as **M R ONE Properties** from the name badges and the award plaque.
+
+**21 Sep 2026** — Second batch of photography. Three new images added (a fourth was byte-identical to one already shipped and was skipped): the Azizi Channel Partners backdrop now anchors a *developer access* block on Track Record, an event close-up gives Contact a face to go with the phone number, and an off-duty shot gives About a human beat — fitting, given "Suit Bro" is a personality brand. Eight images total, 1.3MB, every one used on a page.
+
+**Wording checked, not inflated.** The Azizi photograph shows an event backdrop, not a trophy, so the copy says "channel partner" and lists the projects on the wall rather than implying an award. The Emaar plaque names the brokerage, so that stays a brokerage placing.
