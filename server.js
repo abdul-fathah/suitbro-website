@@ -35,6 +35,13 @@ const MIME = {
   '.txt': 'text/plain; charset=utf-8',
   '.xml': 'application/xml; charset=utf-8',
   '.pdf': 'application/pdf',
+  '.mp4': 'video/mp4',
+  '.m4v': 'video/mp4',
+  '.webm': 'video/webm',
+  '.mov': 'video/quicktime',
+  '.ogv': 'video/ogg',
+  '.m4a': 'audio/mp4',
+  '.mp3': 'audio/mpeg',
 };
 
 function send(res, status, body, headers) {
@@ -42,17 +49,60 @@ function send(res, status, body, headers) {
   res.end(body);
 }
 
-function serveFile(res, filePath, status) {
-  fs.readFile(filePath, (err, data) => {
-    if (err) {
+function serveFile(req, res, filePath, status) {
+  fs.stat(filePath, (err, st) => {
+    if (err || !st.isFile()) {
       send(res, 500, 'Internal server error', { 'Content-Type': 'text/plain; charset=utf-8' });
       return;
     }
+
     const ext = path.extname(filePath).toLowerCase();
     const type = MIME[ext] || 'application/octet-stream';
-    // HTML changes often; hashed-free assets get a short cache. Keep it simple.
+    // HTML changes often; other assets get a short cache. Keep it simple.
     const cache = ext === '.html' ? 'no-cache' : 'public, max-age=3600';
-    send(res, status, data, { 'Content-Type': type, 'Cache-Control': cache });
+
+    function stream(opts, code, extraHeaders) {
+      res.writeHead(code, Object.assign({
+        'Content-Type': type,
+        'Cache-Control': cache,
+        'Accept-Ranges': 'bytes',
+      }, extraHeaders));
+      if (req.method === 'HEAD') { res.end(); return; }
+      const rs = fs.createReadStream(filePath, opts);
+      rs.on('error', () => res.destroy());
+      res.on('close', () => rs.destroy());
+      rs.pipe(res);
+    }
+
+    // A Range request is how a browser seeks within a video. Without this a
+    // <video> element can only play straight through from the start, and the
+    // whole file is buffered before it begins.
+    const range = status === 200 && req.headers.range;
+    const m = range && /^bytes=(\d*)-(\d*)$/.exec(range.trim());
+    if (m && (m[1] !== '' || m[2] !== '')) {
+      let start, end;
+      if (m[1] === '') {                       // suffix form: last N bytes
+        const n = parseInt(m[2], 10);
+        start = Math.max(0, st.size - n);
+        end = st.size - 1;
+      } else {
+        start = parseInt(m[1], 10);
+        end = m[2] === '' ? st.size - 1 : parseInt(m[2], 10);
+      }
+      if (Number.isNaN(start) || Number.isNaN(end) || start > end || start >= st.size) {
+        res.writeHead(416, { 'Content-Range': 'bytes */' + st.size });
+        res.end();
+        return;
+      }
+      end = Math.min(end, st.size - 1);
+      stream({ start: start, end: end }, 206, {
+        'Content-Length': end - start + 1,
+        'Content-Range': 'bytes ' + start + '-' + end + '/' + st.size,
+      });
+      return;
+    }
+
+    stream({}, status, { 'Content-Length': st.size });
   });
 }
 
@@ -84,7 +134,7 @@ const server = http.createServer((req, res) => {
 
   fs.stat(target, (err, stats) => {
     if (!err && stats.isFile()) {
-      serveFile(res, target, 200);
+      serveFile(req, res, target, 200);
       return;
     }
 
@@ -92,11 +142,11 @@ const server = http.createServer((req, res) => {
     const withHtml = target + '.html';
     fs.stat(withHtml, (err2, stats2) => {
       if (!err2 && stats2.isFile()) {
-        serveFile(res, withHtml, 200);
+        serveFile(req, res, withHtml, 200);
         return;
       }
       // Anything else falls back to the homepage.
-      serveFile(res, path.join(ROOT, 'index.html'), 404);
+      serveFile(req, res, path.join(ROOT, 'index.html'), 404);
     });
   });
 });

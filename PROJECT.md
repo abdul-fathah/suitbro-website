@@ -91,7 +91,7 @@ Nav sits at the top of every page, current page highlighted in gold. "Book a cal
 └── PROJECT.md            ← this file
 ```
 
-**Server:** plain Node `http` module, zero npm dependencies. Nothing to install, nothing to break on build. Reads `process.env.PORT` so Railway's assigned port works automatically. Extension-less URLs resolve (`/about` → `about.html`); unmatched routes fall back to the homepage; path traversal is rejected.
+**Server:** plain Node `http` module, zero npm dependencies. Nothing to install, nothing to break on build. Reads `process.env.PORT` so Railway's assigned port works automatically. Extension-less URLs resolve (`/about` → `about.html`); unmatched routes fall back to the homepage; path traversal is rejected. Files are streamed rather than read into memory, and HTTP Range requests are honoured — so video seeks properly and a large file never sits in RAM per request.
 
 **Tested:** all 7 pages return 200, `styles.css` serves as `text/css`, extension-less routes resolve, unknown routes fall back to the homepage, `../` traversal is blocked, non-GET returns 405.
 
@@ -247,3 +247,5 @@ Serve the bare apex, not `www` — the canonical tags name `suitbro.ae`, so redi
 **21 Sep 2026** — Third batch of photography, and a better credential. The trophy visible on the office shelf reads **Quarter 1 Broker Awards 2026 · EMAAR · No. 1 · M R ONE Properties**, which alongside the Q2 plaque makes Recognition a two-quarter story rather than a single placing: first in Q1 2026, second in Q2. Four images added — the Emaar Q1 step-and-repeat and the Q2 trophy now sit side by side, the office shot with the award shelf backs the About credentials, an off-market section on Listings (previously the only page with no photography), and a "straight answers" section on the homepage.
 
 **One photo deliberately not used:** a bathroom mirror selfie. Blurry, and the setting works against everything else on the site. Easy to add if wanted.
+
+**21 Sep 2026** — Made the server video-capable ahead of any video being supplied: added mp4/webm/mov/ogv and audio content types, switched from reading whole files into memory to streaming them, and implemented HTTP Range (206) support. Without Range a `<video>` element cannot seek and buffers the entire file before playing. Range was verified against byte offsets, including open-ended and suffix forms, with 416 on unsatisfiable ranges.

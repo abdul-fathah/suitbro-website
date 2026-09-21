@@ -111,6 +111,12 @@ stats, bio, testimonials, the track-record table and the portrait blocks.
 `<!-- VERIFY: ... -->` marks the two listing taglines that were reconstructed
 from a cropped screenshot.
 
+**Video is supported.** Drop an `.mp4` (or `.webm`) into `public/images/` — or a
+`public/video/` folder — and reference it from a `<video>` tag. The server sends
+the right content type, streams the file rather than loading it into memory, and
+honours Range requests so seeking works. Keep a background loop under about 10MB:
+muted, no audio track, H.264 MP4 for universal support.
+
 **Colours and type live at the top of `public/styles.css`** as CSS custom
 properties. Change `--gold` in one place and it changes everywhere.
 
