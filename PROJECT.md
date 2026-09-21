@@ -132,7 +132,7 @@ strings to find everything that still needs a real answer.
 | About bio | Placeholder | Career background and RERA number still needed; brokerage now named |
 | About stats | Placeholder | Deals / transaction value / years — swap for real figures |
 | Portrait photo | **Real** | Two office portraits supplied Sep 2026 — home and About |
-| Event / awards photography | **Real** | Eight images across Home, About, Track Record, Clients, Contact |
+| Event / awards photography | **Real** | Twelve images across all pages except Market Insights |
 | Listings | **Real (partial)** | Venera + Skyhills are real; photos still placeholder |
 | Track record ledger | Placeholder | 4 invented deals — needs real closings |
 | Market Insights | **Real data** | Live DLD figures, see below |
@@ -179,7 +179,8 @@ These are a snapshot, not a live feed — the numbers are written into the HTML.
 
 - [ ] RERA licence number (brokerage confirmed as M R ONE Properties from the photos — verify)
 - [ ] Confirm which photos are you: the two office portraits are used as yours; the event shot on Clients is captioned neutrally until you say
-- [ ] Confirm the Emaar award framing — the plaque reads No. 2, M R ONE Properties, so it is presented as a brokerage placing, not a personal one
+- [ ] Confirm the Emaar framing — the Q1 2026 trophy reads **No. 1, M R ONE Properties** and the Q2 plaque reads **No. 2**, so both are presented as brokerage placings, not personal ones
+- [ ] One supplied photo was left out: a bathroom mirror selfie. Say the word if you want it in anyway
 - [ ] Photos for the Venera and Skyhills listings
 - [ ] Confirm exact listing taglines (source screenshot was cropped)
 - [ ] Past closed deals for the track record page
@@ -242,3 +243,7 @@ Serve the bare apex, not `www` — the canonical tags name `suitbro.ae`, so redi
 **21 Sep 2026** — Second batch of photography. Three new images added (a fourth was byte-identical to one already shipped and was skipped): the Azizi Channel Partners backdrop now anchors a *developer access* block on Track Record, an event close-up gives Contact a face to go with the phone number, and an off-duty shot gives About a human beat — fitting, given "Suit Bro" is a personality brand. Eight images total, 1.3MB, every one used on a page.
 
 **Wording checked, not inflated.** The Azizi photograph shows an event backdrop, not a trophy, so the copy says "channel partner" and lists the projects on the wall rather than implying an award. The Emaar plaque names the brokerage, so that stays a brokerage placing.
+
+**21 Sep 2026** — Third batch of photography, and a better credential. The trophy visible on the office shelf reads **Quarter 1 Broker Awards 2026 · EMAAR · No. 1 · M R ONE Properties**, which alongside the Q2 plaque makes Recognition a two-quarter story rather than a single placing: first in Q1 2026, second in Q2. Four images added — the Emaar Q1 step-and-repeat and the Q2 trophy now sit side by side, the office shot with the award shelf backs the About credentials, an off-market section on Listings (previously the only page with no photography), and a "straight answers" section on the homepage.
+
+**One photo deliberately not used:** a bathroom mirror selfie. Blurry, and the setting works against everything else on the site. Easy to add if wanted.
