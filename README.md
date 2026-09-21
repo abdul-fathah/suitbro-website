@@ -50,15 +50,34 @@ live — see the workflow below.
 
 ---
 
-## Deploying to Railway
+## Deploying
 
-One-time setup:
+The site can go up two different ways, and they are genuinely different.
+
+### Vercel — recommended for this site
+
+Everything in `public/` is a static file. Vercel serves static files from a
+global CDN, gives free automatic HTTPS, and costs nothing at this traffic
+level. `vercel.json` is already committed: it points Vercel at `public/`,
+turns on `cleanUrls` so `/about` works without the `.html`, and sets cache
+headers.
+
+1. [vercel.com](https://vercel.com) → **Add New → Project** → import `suitbro-website`
+2. It reads `vercel.json`; no settings to change
+3. **Settings → Domains** → add your domain, then add the DNS records it shows you
+
+### Railway — if you want the Node server
+
+`server.js` does things a static host does not: HTTP Range support for video
+seeking, and the homepage fallback on unknown URLs. If you add self-hosted
+video, this is the better option.
 
 1. [railway.com](https://railway.com) → **New Project** → **Deploy from GitHub repo**
 2. Authorise GitHub and pick `suitbro-website`
 3. It builds and starts automatically. **No environment variables needed** —
    the server reads Railway's assigned `PORT` on its own.
-4. **Settings → Networking → Generate Domain** to get the live URL
+4. **Settings → Networking → Generate Domain** to get the live URL — Railway
+   does not expose a public URL until you click this
 
 ## Making changes after that
 
