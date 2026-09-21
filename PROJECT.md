@@ -129,9 +129,9 @@ strings to find everything that still needs a real answer.
 | Section | Status | Notes |
 |---|---|---|
 | Hero copy | Placeholder | Written in the intended voice — needs your check |
-| About bio | Placeholder | Career background, brokerage name, RERA number needed |
+| About bio | Placeholder | Career background and RERA number still needed; brokerage now named |
 | About stats | Placeholder | Deals / transaction value / years — swap for real figures |
-| Portrait photo | Placeholder | Gradient block standing in for a headshot |
+| Portrait photo | **Real** | Two office portraits supplied Sep 2026 — home and About |
 | Listings | **Real (partial)** | Venera + Skyhills are real; photos still placeholder |
 | Track record ledger | Placeholder | 4 invented deals — needs real closings |
 | Market Insights | **Real data** | Live DLD figures, see below |
@@ -176,8 +176,9 @@ These are a snapshot, not a live feed — the numbers are written into the HTML.
 
 ## Needs From You
 
-- [ ] Brokerage name + RERA license number
-- [ ] Real headshot / portrait photo
+- [ ] RERA licence number (brokerage confirmed as M R ONE Properties from the photos — verify)
+- [ ] Confirm which photos are you: the two office portraits are used as yours; the event shot on Clients is captioned neutrally until you say
+- [ ] Confirm the Emaar award framing — the plaque reads No. 2, M R ONE Properties, so it is presented as a brokerage placing, not a personal one
 - [ ] Photos for the Venera and Skyhills listings
 - [ ] Confirm exact listing taglines (source screenshot was cropped)
 - [ ] Past closed deals for the track record page
@@ -234,3 +235,5 @@ Serve the bare apex, not `www` — the canonical tags name `suitbro.ae`, so redi
 **21 Sep 2026** — Design pass two. Modernised the shared system (wider type scale, grain and directional gold glows, layered surfaces, gold-gradient figures, scroll reveals) and rebuilt the homepage around it, then rolled the same treatment across the remaining six pages. Added liquid-glass surfaces — backdrop blur with specular edges and a hover sheen — over new ambient `.orb` light, since glass needs something behind it to refract. Swapped the body face from IBM Plex Sans to Manrope. Added the landing-page intro animation.
 
 **21 Sep 2026** — Fixed the intro not appearing. It had a once-per-browser-session guard that was never asked for; any earlier load in the same tab consumed it, so in practice the animation was invisible. Now plays on every landing-page load, with a tap/key/scroll to skip and a slightly tighter 2.7s timeline.
+
+**21 Sep 2026** — Added real photography. Five supplied images resized and re-encoded for web (3.6MB of originals down to 732KB): two office portraits now carry the home and About heroes in place of the gradient blocks, the Emaar Quarter 2 Broker Awards photo anchors a new Recognition section on Track Record, and two event photographs sit on Clients. Photos get a warm tint and a dark foot so they sit in the palette and overlaid type stays readable. Brokerage identified as **M R ONE Properties** from the name badges and the award plaque.
