@@ -1125,6 +1125,12 @@ html.intro-skip .intro { animation: introOut .36s var(--ease) forwards !importan
 }
 .photo img {
   width: 100%;
+  /* height:auto is load-bearing. The <img> carries width/height attributes to
+     reserve layout space, and that height is a presentational hint the browser
+     honours unless CSS overrides it -- an explicit height makes aspect-ratio
+     inert, so the image renders at its full natural height inside a narrow
+     column. Without this line these photographs are 1300px+ tall on a phone. */
+  height: auto;
   display: block;
   aspect-ratio: 3 / 2;
   object-fit: cover;
@@ -1169,3 +1175,13 @@ html.intro-skip .intro { animation: introOut .36s var(--ease) forwards !importan
 
 /* Portrait-format photograph, for standing shots in a two-up. */
 .photo-tall img { aspect-ratio: 3 / 4; }
+
+/* On phones, tall photographs are shortened so they do not become a scroll
+   wall, and the crop is biased upward to keep faces in frame. */
+@media (max-width: 560px) {
+  .photo-tall img { aspect-ratio: 4 / 5; object-position: center 25%; }
+  .photo img { aspect-ratio: 4 / 3; }
+  .photo-feature img { aspect-ratio: 4 / 3; }
+  .photo figcaption { padding: 16px 18px; }
+  .photo figcaption b { font-size: 1.05rem; }
+}

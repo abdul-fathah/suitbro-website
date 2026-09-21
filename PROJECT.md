@@ -93,7 +93,30 @@ Nav sits at the top of every page, current page highlighted in gold. "Book a cal
 
 **Server:** plain Node `http` module, zero npm dependencies. Nothing to install, nothing to break on build. Reads `process.env.PORT` so Railway's assigned port works automatically. Extension-less URLs resolve (`/about` → `about.html`); unmatched routes fall back to the homepage; path traversal is rejected. Files are streamed rather than read into memory, and HTTP Range requests are honoured — so video seeks properly and a large file never sits in RAM per request.
 
-**Tested:** all 7 pages return 200, `styles.css` serves as `text/css`, extension-less routes resolve, unknown routes fall back to the homepage, `../` traversal is blocked, non-GET returns 405.
+**Tested:** every page returns 200, `styles.css` serves as `text/css`, extension-less routes resolve, unknown routes fall back to the homepage, `../` traversal is blocked, non-GET returns 405, and HTTP Range returns correct partial content (verified against byte offsets, including open-ended and suffix ranges, with 416 on unsatisfiable).
+
+---
+
+## Responsive & QA
+
+Audited across **320, 390, 768, 1024, 1440 and 1920px**, on all seven pages, measuring horizontal overflow, every image's rendered geometry, image up/oversizing, and tap-target heights.
+
+| Check | Result |
+|---|---|
+| Horizontal overflow | 0 at every width |
+| Images rendering too tall | 0 |
+| Images upscaled (blurry) | 0 |
+| Images oversized (wasted bytes) | 0 |
+| Tap targets under 40px | 0 |
+
+**The one real bug found, and fixed.** `.photo img` set `width: 100%` and `aspect-ratio`, but never `height: auto`. The `<img>` tags carry `width`/`height` attributes to reserve layout space, and that height is a presentational hint the browser honours unless CSS overrides it — **an explicit height makes `aspect-ratio` inert**. So on a phone these photographs rendered at their full natural height: a 278px-wide column containing a 1597px-tall image. One line, `height: auto`, fixed all of them.
+
+**Responsive images.** Each photograph now ships at 480w, sometimes 900w, and full size, wired up with `srcset`/`sizes`. A phone at 2x pulls the 900px variant rather than the 1500px original; the full file is only fetched on a 3x display that can actually use it.
+
+**Phone framing.** Below 560px tall photographs crop to 4:5 rather than 3:4, biased upward so faces stay in frame, so no single image becomes a scroll wall.
+
+Note: the marquee ticker track and the decorative `.orb` gradients are intentionally wider than the viewport and are clipped by `overflow: hidden` on their containers. They show up in a naive "element wider than screen" scan; page-level overflow is zero.
+
 
 ---
 
@@ -175,6 +198,17 @@ These are a snapshot, not a live feed — the numbers are written into the HTML.
 
 ---
 
+## Before going live
+
+1. **Make the repository private.** It is currently public. GitHub → Settings → Danger Zone → Change repository visibility. It has been public since 12 Sep, so assume the content has been crawlable.
+2. **Replace the invented content** — the stats, the bio, the four track-record rows, the three testimonials. All are tagged `<!-- PLACEHOLDER: -->` in the markup.
+3. **Settle the name spelling** — the intro says "Abdul Fathah", every page says "Abdul Fatah".
+4. **Buy the domain** and connect it (see Domain, below).
+5. **Wire the contact form** to a real endpoint — it currently confirms on screen but delivers nowhere.
+6. Optionally add listing photography for Venera and Skyhills, the last visibly empty thing on the site.
+
+---
+
 ## Needs From You
 
 - [ ] RERA licence number (brokerage confirmed as M R ONE Properties from the photos — verify)
@@ -249,3 +283,5 @@ Serve the bare apex, not `www` — the canonical tags name `suitbro.ae`, so redi
 **One photo deliberately not used:** a bathroom mirror selfie. Blurry, and the setting works against everything else on the site. Easy to add if wanted.
 
 **21 Sep 2026** — Made the server video-capable ahead of any video being supplied: added mp4/webm/mov/ogv and audio content types, switched from reading whole files into memory to streaming them, and implemented HTTP Range (206) support. Without Range a `<video>` element cannot seek and buffers the entire file before playing. Range was verified against byte offsets, including open-ended and suffix forms, with 416 on unsatisfiable ranges.
+
+**21 Sep 2026** — Pre-launch pass. Audited all seven pages at six widths from 320 to 1920px. Found and fixed a real mobile bug: `.photo img` had `aspect-ratio` but no `height: auto`, so the `height` attribute on each `<img>` kept the CSS ratio inert and photographs rendered at full natural height inside narrow columns — over 1500px tall on a phone. Added responsive `srcset`/`sizes` with 480w and 900w variants, tightened phone crop ratios, and added `vercel.json` so the site can deploy to Vercel as static files as well as to Railway as a Node app. Overflow, oversizing, upscaling and tap-target checks all now read zero.
