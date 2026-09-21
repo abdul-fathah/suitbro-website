@@ -32,7 +32,12 @@ Source: user-selected palette (coolors.co/000000-ffa800).
 ### Type
 
 - **Display:** Fraunces (serif) — H1/H2, prices, stat numbers
-- **Body/UI:** IBM Plex Sans — body copy, nav, data tables
+- **Body/UI:** Manrope — body copy, nav, data tables
+
+Manrope replaced IBM Plex Sans in Sep 2026. It carries weights 300–800, which the
+fine label/heading hierarchy leans on, has strong numerals for the DLD tables, and
+reads contemporary without being Inter (the safe default) or Space Grotesk (the
+overused one).
 
 Both loaded from Google Fonts, with system-serif and system-sans fallbacks.
 
@@ -51,6 +56,11 @@ Multi-page. One HTML file per nav item, all sharing a single `styles.css`.
 | Market Insights | `market-insights.html` | Live Dubai market data |
 | Clients | `clients.html` | Testimonials, who I work with |
 | Contact | `contact.html` | Form + direct contact info |
+
+An intro plays on the landing page only: the name **Abdul Fathah** set in Fraunces,
+letters rising in sequence over a warm glow, held for a beat, then lifted away. It
+shows once per browser session, is skipped entirely under `prefers-reduced-motion`,
+and is added by script — so it can never trap a visitor without JavaScript.
 
 Nav sits at the top of every page, current page highlighted in gold. "Book a call" (hero + contact) links to `tel:+971557726097`.
 
@@ -172,6 +182,9 @@ These are a snapshot, not a live feed — the numbers are written into the HTML.
 - [ ] 2–3 real client testimonials
 - [ ] Buy `suitbro.ae` and set up the `hello@` mailbox
 - [ ] Confirm +971 55 772 6097 is on WhatsApp (the floating button assumes it is)
+- [ ] **Confirm the spelling of your name.** The site says "Abdul Fatah" throughout;
+      the intro animation says "Abdul Fathah" (your wording, and your GitHub handle).
+      One of the two is wrong and it is the most visible word on the site.
 - [ ] Bio background — how you got into Dubai real estate
 - [ ] Real figures for the stat blocks (deals, transaction value, years, referral rate)
 
@@ -215,3 +228,5 @@ Serve the bare apex, not `www` — the canonical tags name `suitbro.ae`, so redi
 **12 Sep 2026** — Built out and committed to the repo. Closed two of the open gaps: added a working mobile nav (hamburger below 800px — links were previously just hidden) and a floating WhatsApp button. Market Insights re-queried live against DXB INTERACT rather than reusing the written-in figures, and extended with a busiest-areas-by-volume table, sample-size columns on every yield row, and the DLD's own area naming. Server hardened against path traversal and given extension-less URL support. Every placeholder tagged inline with `<!-- PLACEHOLDER: -->` / `<!-- VERIFY: -->` so nothing invented can reach production unnoticed.
 
 **12 Sep 2026** — Wired the site for its own domain, `suitbro.ae`, rather than the generated Railway hostname: canonical URLs and Open Graph tags (`og:url`, `og:site_name`, `og:locale`) on all seven pages, plus `sitemap.xml` and `robots.txt`. Verified both new files serve with the right MIME types. Renamed the default branch to `main`.
+
+**21 Sep 2026** — Design pass two. Modernised the shared system (wider type scale, grain and directional gold glows, layered surfaces, gold-gradient figures, scroll reveals) and rebuilt the homepage around it, then rolled the same treatment across the remaining six pages. Added liquid-glass surfaces — backdrop blur with specular edges and a hover sheen — over new ambient `.orb` light, since glass needs something behind it to refract. Swapped the body face from IBM Plex Sans to Manrope. Added the landing-page intro animation.

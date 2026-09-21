@@ -15,8 +15,9 @@
 <meta property="og:locale" content="en_AE">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js');</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%23FFA800' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
 </head>
 <body>
@@ -50,15 +51,15 @@
   <div class="shell">
     <!-- PLACEHOLDER: all three testimonials are invented — replace with real quotes and attribution -->
     <div class="grid grid-3">
-      <figure class="quote">
+      <figure class="quote reveal">
         <blockquote>&ldquo;He talked me out of the first two places I fell in love with. The third one I bought has gone up 14%. That tells you everything.&rdquo;</blockquote>
         <figcaption><strong>First-time buyer</strong>Business Bay &middot; 2026</figcaption>
       </figure>
-      <figure class="quote">
+      <figure class="quote reveal">
         <blockquote>&ldquo;Priced my villa off actual transfers rather than what I wanted to hear. Under offer in eleven days at asking.&rdquo;</blockquote>
         <figcaption><strong>Seller</strong>Arabian Ranches &middot; 2026</figcaption>
       </figure>
-      <figure class="quote">
+      <figure class="quote reveal">
         <blockquote>&ldquo;I'm buying from overseas and never once had to chase him for an update. That alone is rare here.&rdquo;</blockquote>
         <figcaption><strong>Overseas investor</strong>JVC &middot; 2026</figcaption>
       </figure>
@@ -68,22 +69,22 @@
 
 <section class="has-orbs tone-2"><span class="orb orb-cool orb-b" aria-hidden="true"></span><span class="orb orb-cool orb-a" aria-hidden="true"></span>
   <div class="shell">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">Who I work with</p>
       <h2>Three kinds of brief.</h2>
     </div>
     <div class="grid grid-3">
-      <article class="card">
+      <article class="card reveal">
         <span class="num">01</span>
         <h3>End users</h3>
         <p>Buying somewhere to actually live. School runs, commutes, and whether the community will still be a building site in two years.</p>
       </article>
-      <article class="card">
+      <article class="card reveal">
         <span class="num">02</span>
         <h3>Investors</h3>
         <p>Yield after service charges, tenant demand, and a realistic exit. The gross yield on a portal listing is not the number that matters.</p>
       </article>
-      <article class="card">
+      <article class="card reveal">
         <span class="num">03</span>
         <h3>Sellers</h3>
         <p>Priced from comparable transfers, marketed properly, and negotiated without flinching at the first offer.</p>
@@ -94,7 +95,7 @@
 
 <section class="has-orbs"><span class="orb orb-a" aria-hidden="true"></span>
   <div class="shell">
-    <div class="callout cta-band">
+    <div class="callout cta-band reveal">
       <h2>Ready when you are.</h2>
       <p class="lede" style="margin-top:1.2rem;">Tell me the brief. I'll tell you straight whether it's realistic in this market.</p>
       <div class="btn-row">
@@ -138,11 +139,24 @@
 (function () {
   var btn = document.getElementById('navToggle');
   var nav = document.getElementById('primaryNav');
-  if (!btn || !nav) return;
-  btn.addEventListener('click', function () {
-    var open = nav.classList.toggle('open');
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
+  if (btn && nav) {
+    btn.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    for (var i = 0; i < els.length; i++) els[i].classList.add('in');
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+  els.forEach(function (el) { io.observe(el); });
 })();
 </script>
 </body>

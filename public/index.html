@@ -15,12 +15,31 @@
 <meta property="og:locale" content="en_AE">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%23FFA800' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
-<script>document.documentElement.classList.add('js');</script>
+<script>
+(function () {
+  var d = document.documentElement;
+  d.classList.add('js');
+  var reduce = false;
+  try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+  var seen = false;
+  try { seen = sessionStorage.getItem('sb-intro') === '1'; } catch (e) {}
+  if (!reduce && !seen) {
+    d.classList.add('intro-on');
+    try { sessionStorage.setItem('sb-intro', '1'); } catch (e) {}
+    setTimeout(function () { d.classList.remove('intro-on'); }, 3200);
+  }
+})();
+</script>
 </head>
 <body>
+
+<div class="intro" role="presentation">
+  <p class="intro-name" aria-label="Abdul Fathah"><span style="--i:0">A</span><span style="--i:1">b</span><span style="--i:2">d</span><span style="--i:3">u</span><span style="--i:4">l</span><span class="sp" aria-hidden="true"> </span><span style="--i:6">F</span><span style="--i:7">a</span><span style="--i:8">t</span><span style="--i:9">h</span><span style="--i:10">a</span><span style="--i:11">h</span></p>
+</div>
+
 
 <header class="masthead">
   <div class="shell">
@@ -170,10 +189,10 @@
       <p>Every figure on this site comes out of Dubai Land Department records and Ejari contracts. Here's the city right now.</p>
     </div>
     <div class="insight reveal">
-      <div class="stat"><span class="figure">43,666</span><span class="label">Transactions &middot; 11 weeks</span></div>
-      <div class="stat"><span class="figure">AED 1.20M</span><span class="label">Median sale price</span></div>
-      <div class="stat"><span class="figure">162</span><span class="label">Areas tracked</span></div>
-      <div class="stat"><span class="figure">11.82%</span><span class="label">Highest gross yield</span></div>
+      <div class="stat reveal"><span class="figure">43,666</span><span class="label">Transactions &middot; 11 weeks</span></div>
+      <div class="stat reveal"><span class="figure">AED 1.20M</span><span class="label">Median sale price</span></div>
+      <div class="stat reveal"><span class="figure">162</span><span class="label">Areas tracked</span></div>
+      <div class="stat reveal"><span class="figure">11.82%</span><span class="label">Highest gross yield</span></div>
     </div>
     <p class="source-note">Dubai Land Department, 23 June &ndash; 10 September 2026. <a href="market-insights.html">See the full breakdown &rarr;</a></p>
   </div>

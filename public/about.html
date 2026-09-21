@@ -15,8 +15,9 @@
 <meta property="og:locale" content="en_AE">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js');</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23000'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%23FFA800' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
 </head>
 <body>
@@ -57,16 +58,16 @@
 
 <section class="tone-2">
   <div class="shell">
-    <div class="section-head">
+    <div class="section-head reveal">
       <p class="eyebrow">By the numbers</p>
       <h2>The record so far.</h2>
     </div>
     <!-- PLACEHOLDER: figures invented -->
     <div class="grid grid-4">
-      <div class="stat"><span class="figure">120+</span><span class="label">Deals closed</span></div>
-      <div class="stat"><span class="figure">AED 480M</span><span class="label">Transaction value</span></div>
-      <div class="stat"><span class="figure">8</span><span class="label">Years in Dubai</span></div>
-      <div class="stat"><span class="figure">62%</span><span class="label">Repeat &amp; referral</span></div>
+      <div class="stat reveal"><span class="figure">120+</span><span class="label">Deals closed</span></div>
+      <div class="stat reveal"><span class="figure">AED 480M</span><span class="label">Transaction value</span></div>
+      <div class="stat reveal"><span class="figure">8</span><span class="label">Years in Dubai</span></div>
+      <div class="stat reveal"><span class="figure">62%</span><span class="label">Repeat &amp; referral</span></div>
     </div>
   </div>
 </section>
@@ -80,7 +81,7 @@
         <p class="muted" style="margin-top:1.2rem;">Every transaction runs through the Dubai Land Department. Nothing happens off the record.</p>
       </div>
       <!-- PLACEHOLDER: brokerage name and RERA number required before going live -->
-      <ul class="creds">
+      <ul class="creds reveal">
         <li>RERA-certified property consultant &mdash; <span class="gold">licence number to be added</span></li>
         <li>Brokerage &mdash; <span class="gold">brokerage name to be added</span></li>
         <li>Registered with the Dubai Land Department (DLD)</li>
@@ -94,7 +95,7 @@
 
 <section class="has-orbs tone-2"><span class="orb orb-b" aria-hidden="true"></span>
   <div class="shell">
-    <div class="callout cta-band">
+    <div class="callout cta-band reveal">
       <h2>Worth a conversation?</h2>
       <p class="lede" style="margin-top:1.2rem;">No pitch. Tell me the brief and I'll tell you if it's realistic.</p>
       <div class="btn-row">
@@ -138,11 +139,24 @@
 (function () {
   var btn = document.getElementById('navToggle');
   var nav = document.getElementById('primaryNav');
-  if (!btn || !nav) return;
-  btn.addEventListener('click', function () {
-    var open = nav.classList.toggle('open');
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
+  if (btn && nav) {
+    btn.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  var els = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    for (var i = 0; i < els.length; i++) els[i].classList.add('in');
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+  els.forEach(function (el) { io.observe(el); });
 })();
 </script>
 </body>
