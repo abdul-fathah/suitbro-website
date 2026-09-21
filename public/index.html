@@ -24,13 +24,27 @@
   d.classList.add('js');
   var reduce = false;
   try { reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
-  var seen = false;
-  try { seen = sessionStorage.getItem('sb-intro') === '1'; } catch (e) {}
-  if (!reduce && !seen) {
-    d.classList.add('intro-on');
-    try { sessionStorage.setItem('sb-intro', '1'); } catch (e) {}
-    setTimeout(function () { d.classList.remove('intro-on'); }, 3200);
+  if (reduce) return;                       // honour the preference: no intro at all
+
+  d.classList.add('intro-on');
+  var done = false;
+  function end() {
+    if (done) return;
+    done = true;
+    d.classList.remove('intro-on', 'intro-skip');
   }
+  var t = setTimeout(end, 2800);            // matches the CSS timeline
+
+  // let an impatient visitor get past it
+  function skip() {
+    if (done) return;
+    clearTimeout(t);
+    d.classList.add('intro-skip');          // fast fade rather than a hard cut
+    setTimeout(end, 360);
+  }
+  ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) {
+    window.addEventListener(ev, skip, { once: true, passive: true });
+  });
 })();
 </script>
 </head>

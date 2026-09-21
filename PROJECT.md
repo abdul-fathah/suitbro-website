@@ -58,9 +58,11 @@ Multi-page. One HTML file per nav item, all sharing a single `styles.css`.
 | Contact | `contact.html` | Form + direct contact info |
 
 An intro plays on the landing page only: the name **Abdul Fathah** set in Fraunces,
-letters rising in sequence over a warm glow, held for a beat, then lifted away. It
-shows once per browser session, is skipped entirely under `prefers-reduced-motion`,
-and is added by script — so it can never trap a visitor without JavaScript.
+letters rising in sequence over a warm glow, held for a beat, then lifted away —
+about 2.7 seconds end to end. It plays on every load of the landing page, can be
+dismissed early with a tap, key or scroll, is skipped entirely under
+`prefers-reduced-motion`, and is added by script — so it can never trap a visitor
+without JavaScript.
 
 Nav sits at the top of every page, current page highlighted in gold. "Book a call" (hero + contact) links to `tel:+971557726097`.
 
@@ -230,3 +232,5 @@ Serve the bare apex, not `www` — the canonical tags name `suitbro.ae`, so redi
 **12 Sep 2026** — Wired the site for its own domain, `suitbro.ae`, rather than the generated Railway hostname: canonical URLs and Open Graph tags (`og:url`, `og:site_name`, `og:locale`) on all seven pages, plus `sitemap.xml` and `robots.txt`. Verified both new files serve with the right MIME types. Renamed the default branch to `main`.
 
 **21 Sep 2026** — Design pass two. Modernised the shared system (wider type scale, grain and directional gold glows, layered surfaces, gold-gradient figures, scroll reveals) and rebuilt the homepage around it, then rolled the same treatment across the remaining six pages. Added liquid-glass surfaces — backdrop blur with specular edges and a hover sheen — over new ambient `.orb` light, since glass needs something behind it to refract. Swapped the body face from IBM Plex Sans to Manrope. Added the landing-page intro animation.
+
+**21 Sep 2026** — Fixed the intro not appearing. It had a once-per-browser-session guard that was never asked for; any earlier load in the same tab consumed it, so in practice the animation was invisible. Now plays on every landing-page load, with a tap/key/scroll to skip and a slightly tighter 2.7s timeline.

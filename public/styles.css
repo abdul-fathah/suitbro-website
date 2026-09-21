@@ -1029,10 +1029,11 @@ thead th {
 
 /* ==========================================================================
    Intro
-   The name, held for a beat, then lifted away. Shown once per session on the
-   landing page only. Added by script, so it can never trap a no-JS visitor;
-   cleared by its own animation, so it cannot outlive a failed timer; and
-   skipped entirely for anyone who asked for reduced motion.
+   The name, held for a beat, then lifted away. Plays on every load of the
+   landing page. Added by script, so it can never trap a no-JS visitor;
+   cleared by its own animation, so it cannot outlive a failed timer; skipped
+   entirely for anyone who asked for reduced motion; and dismissed early by a
+   tap, key or scroll.
    ========================================================================== */
 
 .intro { display: none; }
@@ -1046,7 +1047,7 @@ html.intro-on .intro {
   inset: 0;
   z-index: 200;
   background: var(--ink);
-  animation: introOut 1s var(--ease) 2.15s forwards;
+  animation: introOut .85s var(--ease) 1.85s forwards;
 }
 
 /* Ambient warmth so the panel isn't a dead black rectangle. */
@@ -1081,6 +1082,8 @@ html.intro-on .intro::before {
   animation-delay: calc(var(--i) * 42ms);
 }
 .intro-name .sp { width: 0.3em; }
+
+html.intro-skip .intro { animation: introOut .36s var(--ease) forwards !important; }
 
 @keyframes letterIn { to { opacity: 1; transform: none; } }
 @keyframes glowIn   { to { opacity: 1; } }
