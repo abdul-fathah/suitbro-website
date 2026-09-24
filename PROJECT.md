@@ -156,7 +156,7 @@ strings to find everything that still needs a real answer.
 | About stats | Placeholder | Deals / transaction value / years — swap for real figures |
 | Portrait photo | **Real** | Two office portraits supplied Sep 2026 — home and About |
 | Event / awards photography | **Real** | Twelve images across all pages except Market Insights |
-| Listings | **Real (partial)** | Venera + Skyhills are real; photos still placeholder |
+| Listings | **Real (partial)** | Venera + Skyhills real, now with verified project data; photography still outstanding |
 | Track record ledger | Placeholder | 4 invented deals — needs real closings |
 | Market Insights | **Real data** | Live DLD figures, see below |
 | Testimonials | Placeholder | 3 invented quotes |
@@ -215,7 +215,7 @@ These are a snapshot, not a live feed — the numbers are written into the HTML.
 - [ ] Confirm which photos are you: the two office portraits are used as yours; the event shot on Clients is captioned neutrally until you say
 - [ ] Confirm the Emaar framing — the Q1 2026 trophy reads **No. 1, M R ONE Properties** and the Q2 plaque reads **No. 2**, so both are presented as brokerage placings, not personal ones
 - [ ] One supplied photo was left out: a bathroom mirror selfie. Say the word if you want it in anyway
-- [ ] Photos for the Venera and Skyhills listings
+- [ ] Photos for the Venera and Skyhills listings — drop them in `public/images/listings/`, see the README there
 - [ ] Confirm exact listing taglines (source screenshot was cropped)
 - [ ] Past closed deals for the track record page
 - [ ] 2–3 real client testimonials
@@ -295,3 +295,11 @@ Chart decisions, made by method rather than taste. Each chart is a single series
 **What was deliberately not built: a fake live feed.** The request was for animation suggesting the figures update in real time. They do not — the data is a snapshot pulled by hand and written into the HTML. A ticking counter or a "LIVE" badge would imply a feed that does not exist, on the one page whose credibility rests entirely on the numbers being checkable. What went in instead is a count-up on reveal, which reads as motion without claiming currency, plus a freshness stamp that computes its own relative age in the browser ("Updated today", "Updated 3 weeks ago") from a date in the HTML. That is genuinely dynamic and it ages honestly — it will say "Updated 2 months ago" when that is true, which is also a useful nudge to refresh.
 
 Degradation was tested rather than assumed, in four states: normally (counts up, lands exactly on the written value), under `prefers-reduced-motion` (real values immediately, nothing animated), with the observer never firing (a six-second failsafe releases every bar), and with JavaScript disabled entirely (every figure, every full-width bar and the absolute date all present). The pre-animation state is installed by `app.js` itself rather than by the stylesheet, so a failure to load that file leaves the page correct rather than blank.
+
+**24 Sep 2026** — Listing photography still cannot be added: none was supplied, and generating or borrowing images of real units at real prices is the one thing on this site that could mislead a buyer outright. What went in instead:
+
+- **Verified project data on both cards**, pulled from DLD-backed project records. Venera: Emaar, handover Q3 2028, 51.7% complete, project four-bed median AED 3.35M across 348 homes, and four-bed price per sqft running about 28% below the area average — which is the first evidence on the site for the existing "best-priced 4BR" tagline. Skyhills Residences 2: developer HRE, 95% complete with handover imminent, project one-bed median AED 1.28M across 238 units, and a post-handover plan spreading 50% over 24 months after keys.
+- **The empty photo slot now carries a fact** ("51.7% built · handover Q3 2028") instead of apologising with "Photography to follow".
+- **`public/images/listings/`** with a README naming the exact files to drop in, and `scripts/resize-images.js` to generate the 480w/900w variants.
+
+Note the DLD area names differ from the marketing ones again: Venera sits in Al Yufrah 1, Skyhills in Al Barsha South Fourth (which is what JVC is registered as).
