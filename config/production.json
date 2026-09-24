@@ -1,0 +1,10 @@
+{
+  "name": "production",
+  "label": "PROD",
+  "description": "The live public site.",
+  "baseUrl": "https://suitbro.ae",
+  "indexable": true,
+  "showBanner": false,
+  "showAnnotations": false,
+  "cache": { "html": "no-cache", "assets": "public, max-age=604800" }
+}

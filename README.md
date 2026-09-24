@@ -1,148 +1,75 @@
-# Suit Bro — suitbro-website
+# Suit Bro
 
-Personal site for **Abdul Fatah**, real estate agent, Dubai / UAE.
+Personal website for **Abdul Fatah**, real estate agent, Dubai / UAE.
 
-Static HTML, black + gold, zero build step. Served by a dependency-free Node
-server so it deploys anywhere that runs Node.
+Static HTML, black and gold, no dependencies. Three environments built from
+one source.
 
 ---
 
-## Run it locally
+## Quick start
 
 ```bash
-npm start
+npm run dev
 ```
 
-Then open <http://localhost:3000>. There is nothing to install first — the
-server uses only Node's built-in modules. Node 18 or newer.
+Open <http://localhost:3000>. Nothing to install first — Node 18+ is the only
+requirement.
 
-To use a different port:
+---
+
+## Documentation
+
+Everything is in [`docs/`](docs/README.md):
+
+| # | Document | Read it when |
+|---|---|---|
+| 01 | [Architecture](docs/01-architecture.md) | You want to know how it fits together |
+| 02 | [Environments](docs/02-environments.md) | You need dev vs staging vs production |
+| 03 | [Development](docs/03-development.md) | You are about to change something |
+| 04 | [Deployment](docs/04-deployment.md) | You are putting it live |
+| 05 | [Content status](docs/05-content-status.md) | You need to know what is real |
+
+Brand decisions, project history and the changelog: [`PROJECT.md`](PROJECT.md).
+
+---
+
+## Layout
+
+```
+public/          the site — the only place you edit
+config/          one file per environment
+scripts/         build.js and check.js
+dist/            generated output, never committed
+docs/            documentation
+server.js        static file server
+```
+
+---
+
+## The three environments
+
+| | Base URL | Indexed | Build |
+|---|---|---|---|
+| development | `http://localhost:3000` | No | `npm run build:dev` |
+| staging | `https://staging.suitbro.ae` | No | `npm run build:staging` |
+| production | `https://suitbro.ae` | Yes | `npm run build:prod` |
+
+Development and staging show a corner badge and make every piece of invented
+content visible on the page. Production shows neither.
+
+---
+
+## Before releasing
 
 ```bash
-PORT=8080 npm start
+npm run build:prod && npm run check
 ```
 
----
+`check` exits non-zero if the build is not safe to ship — wrong hostnames,
+missing assets, a robots policy that would let a preview get indexed, or
+placeholder content in a public build.
 
-## What's where
-
-```
-.
-├── public/                 ← everything user-facing
-│   ├── index.html          ← Home
-│   ├── about.html          ← About
-│   ├── listings.html       ← Listings
-│   ├── track-record.html   ← Track Record
-│   ├── market-insights.html← Market Insights
-│   ├── clients.html        ← Clients
-│   ├── contact.html        ← Contact
-│   └── styles.css          ← the single shared stylesheet
-├── server.js               ← static file server (no dependencies)
-├── package.json            ← start script + Node version
-├── railway.json            ← Railway build/deploy config
-├── PROJECT.md              ← living project doc: brand, status, what's still needed
-└── README.md               ← this file
-```
-
-Every page is plain, standalone HTML. There is no templating and no build
-step, which means **you can edit any page directly on GitHub** and it goes
-live — see the workflow below.
-
----
-
-## Deploying
-
-The site can go up two different ways, and they are genuinely different.
-
-### Vercel — recommended for this site
-
-Everything in `public/` is a static file. Vercel serves static files from a
-global CDN, gives free automatic HTTPS, and costs nothing at this traffic
-level. `vercel.json` is already committed: it points Vercel at `public/`,
-turns on `cleanUrls` so `/about` works without the `.html`, and sets cache
-headers.
-
-1. [vercel.com](https://vercel.com) → **Add New → Project** → import `suitbro-website`
-2. It reads `vercel.json`; no settings to change
-3. **Settings → Domains** → add your domain, then add the DNS records it shows you
-
-### Railway — if you want the Node server
-
-`server.js` does things a static host does not: HTTP Range support for video
-seeking, and the homepage fallback on unknown URLs. If you add self-hosted
-video, this is the better option.
-
-1. [railway.com](https://railway.com) → **New Project** → **Deploy from GitHub repo**
-2. Authorise GitHub and pick `suitbro-website`
-3. It builds and starts automatically. **No environment variables needed** —
-   the server reads Railway's assigned `PORT` on its own.
-4. **Settings → Networking → Generate Domain** to get the live URL — Railway
-   does not expose a public URL until you click this
-
-## Making changes after that
-
-1. Open the file you want to change on GitHub
-2. Click the pencil icon, make the edit, **Commit changes**
-3. Railway redeploys within about a minute
-
-Each commit is a checkpoint you can roll back to from GitHub's history.
-
----
-
-## Custom domain — suitbro.ae
-
-The site is wired for `https://suitbro.ae`: every page carries a `<link rel="canonical">`
-and Open Graph `og:url`, and `public/sitemap.xml` + `public/robots.txt` point there.
-
-To connect it after buying the domain:
-
-1. **Railway** → your service → **Settings → Networking → Custom Domain**
-2. Enter `suitbro.ae`. Railway shows you a DNS target (something like
-   `xxxx.up.railway.app`).
-3. **At your registrar's DNS panel**, add the record Railway asks for:
-   - `www` → **CNAME** → the Railway target
-   - the apex (`suitbro.ae`, sometimes written `@`) → **ALIAS**/**ANAME**, or the
-     **A** record Railway gives you. A plain CNAME is not valid at the apex, so if
-     your registrar offers neither ALIAS nor ANAME, put the site on `www.suitbro.ae`
-     and redirect the apex to it.
-4. Wait for DNS to propagate (minutes to a few hours) — Railway issues the TLS
-   certificate automatically once it resolves.
-
-**If you change the domain**, the URL appears in four places: the `<link rel="canonical">`
-and `og:url` tags in each of the seven pages, plus `sitemap.xml` and `robots.txt`.
-Search and replace `https://suitbro.ae` across `public/`.
-
-**Pick one hostname and stick to it.** Serving the same pages on both `suitbro.ae` and
-`www.suitbro.ae` splits your search ranking between two addresses. The canonical tags
-currently name the bare `suitbro.ae`, so redirect `www` to it rather than serving both.
-
----
-
-## Editing notes
-
-**The navigation is repeated in every file.** If you add or rename a page you
-have to update the `<nav class="nav">` block *and* the footer nav in all seven
-files. That is the trade-off for having no build step.
-
-**Look for `<!-- PLACEHOLDER: ... -->` comments.** They mark every piece of
-invented content that needs replacing before the site goes properly live —
-stats, bio, testimonials, the track-record table and the portrait blocks.
-`<!-- VERIFY: ... -->` marks the two listing taglines that were reconstructed
-from a cropped screenshot.
-
-**Video is supported.** Drop an `.mp4` (or `.webm`) into `public/images/` — or a
-`public/video/` folder — and reference it from a `<video>` tag. The server sends
-the right content type, streams the file rather than loading it into memory, and
-honours Range requests so seeking works. Keep a background loop under about 10MB:
-muted, no audio track, H.264 MP4 for universal support.
-
-**Colours and type live at the top of `public/styles.css`** as CSS custom
-properties. Change `--gold` in one place and it changes everywhere.
-
-**The contact form does not send anything yet.** It validates and shows a
-confirmation that tells the visitor to call instead. To make it deliver, point
-the `<form>` at a [Formspree](https://formspree.io) endpoint and delete the
-inline `<script>` at the bottom of `contact.html`.
-
-See `PROJECT.md` for the full status of what is real and what is still
-placeholder.
+> **Note:** the site still contains invented statistics, testimonials and
+> track-record entries. See [content status](docs/05-content-status.md) before
+> putting it in front of clients.

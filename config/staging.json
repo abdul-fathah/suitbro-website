@@ -1,0 +1,10 @@
+{
+  "name": "staging",
+  "label": "STAGING",
+  "description": "Shared preview for review before release. Must never be indexed.",
+  "baseUrl": "https://staging.suitbro.ae",
+  "indexable": false,
+  "showBanner": true,
+  "showAnnotations": true,
+  "cache": { "html": "no-cache", "assets": "public, max-age=300" }
+}

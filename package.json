@@ -2,10 +2,19 @@
   "name": "suitbro-website",
   "version": "1.0.0",
   "private": true,
-  "description": "Suit Bro — personal site for Abdul Fatah, real estate agent, Dubai UAE.",
+  "description": "Suit Bro \u2014 personal site for Abdul Fatah, real estate agent, Dubai UAE.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "dev": "node scripts/build.js development && SERVE_DIR=dist/development node server.js",
+    "build:dev": "node scripts/build.js development",
+    "build:staging": "node scripts/build.js staging",
+    "build:prod": "node scripts/build.js production",
+    "build:all": "npm run build:dev && npm run build:staging && npm run build:prod",
+    "serve:dev": "SERVE_DIR=dist/development node server.js",
+    "serve:staging": "SERVE_DIR=dist/staging node server.js",
+    "serve:prod": "SERVE_DIR=dist/production node server.js",
+    "start": "node scripts/build.js production && SERVE_DIR=dist/production node server.js",
+    "check": "node scripts/check.js"
   },
   "engines": {
     "node": ">=18"

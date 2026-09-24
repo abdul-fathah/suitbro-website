@@ -15,7 +15,15 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = process.env.PORT || 3000;
-const ROOT = path.join(__dirname, 'public');
+// Which directory to serve. Defaults to public/ so the raw source can still be
+// served directly; the environment builds set this to dist/<environment>.
+const ROOT = path.resolve(__dirname, process.env.SERVE_DIR || 'public');
+
+if (!fs.existsSync(ROOT)) {
+  console.error(`Nothing to serve: ${ROOT} does not exist.`);
+  console.error(`Run a build first, e.g.  node scripts/build.js development`);
+  process.exit(1);
+}
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -152,5 +160,10 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Suit Bro running on http://localhost:${PORT}`);
+  let env = 'public/ (raw source)';
+  try {
+    env = JSON.parse(fs.readFileSync(path.join(ROOT, 'build-info.json'), 'utf8')).environment;
+  } catch (e) { /* serving raw source, no build-info present */ }
+  console.log(`Suit Bro [${env}] running on http://localhost:${PORT}`);
+  console.log(`  serving ${path.relative(__dirname, ROOT) || '.'}`);
 });

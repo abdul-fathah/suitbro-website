@@ -1,0 +1,10 @@
+{
+  "name": "development",
+  "label": "DEV",
+  "description": "Local machine only. Never public, never indexed.",
+  "baseUrl": "http://localhost:3000",
+  "indexable": false,
+  "showBanner": true,
+  "showAnnotations": true,
+  "cache": { "html": "no-store", "assets": "no-store" }
+}
