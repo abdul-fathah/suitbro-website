@@ -1185,3 +1185,135 @@ html.intro-skip .intro { animation: introOut .36s var(--ease) forwards !importan
   .photo figcaption { padding: 16px 18px; }
   .photo figcaption b { font-size: 1.05rem; }
 }
+
+/* ==========================================================================
+   Charts
+   Horizontal bars in HTML rather than SVG, so labels stay legible at every
+   width instead of scaling with a viewBox. One series per chart, so the bar
+   colour carries no meaning beyond "this is data" — length is the encoding.
+   Where a figure rests on a thin sample it is hatched, not recoloured, so the
+   caveat survives for colourblind readers and in print.
+   ========================================================================== */
+
+.chart {
+  margin: 0;
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--r-md);
+  padding: clamp(24px, 3.2vw, 38px);
+  background: var(--glass-tint);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-spec), var(--glass-drop);
+}
+
+.chart figcaption { display: block; margin-bottom: 1.6rem; }
+.chart figcaption h3 { margin-bottom: .5rem; }
+.chart figcaption p { color: var(--muted); font-size: .92rem; margin: 0; max-width: 62ch; }
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-bottom: 1.5rem;
+  font-size: .74rem;
+  color: var(--muted);
+}
+.chart-legend span { display: inline-flex; align-items: center; gap: 8px; }
+.chart-legend i {
+  width: 22px; height: 10px; border-radius: 2px;
+  background: var(--gold);
+  flex: none;
+}
+.chart-legend i.thin {
+  background:
+    repeating-linear-gradient(135deg,
+      var(--gold) 0 3px, rgba(255,168,0,.22) 3px 7px);
+}
+
+.bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+
+.bars li {
+  display: grid;
+  grid-template-columns: minmax(96px, 22%) 1fr auto;
+  align-items: center;
+  gap: 14px;
+}
+
+.bar-label {
+  font-size: .82rem;
+  color: var(--muted);
+  line-height: 1.25;
+  text-wrap: balance;
+}
+.bar-label small { display: block; font-size: .68rem; color: var(--faint); }
+
+.bar-track {
+  position: relative;
+  height: 20px;
+  border-radius: 3px;
+  background: rgba(242, 240, 234, .055);
+  overflow: visible;
+}
+
+.bar {
+  position: relative;
+  display: block;
+  height: 100%;
+  width: var(--pct);
+  border-radius: 0 4px 4px 0;      /* rounded data end, square at the baseline */
+  background: var(--gold);
+  transition: filter .2s var(--ease);
+}
+.bar.thin {
+  background:
+    repeating-linear-gradient(135deg,
+      var(--gold) 0 3px, rgba(255,168,0,.22) 3px 7px);
+}
+.bar:hover, .bar:focus-visible { filter: brightness(1.12); }
+
+/* Hover / focus tooltip. The value is already labelled, so this carries the
+   detail that does not fit on the row. */
+.bar[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 100%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  min-width: 150px;
+  max-width: 260px;
+  padding: 9px 12px;
+  border-radius: var(--r-sm);
+  background: #000;
+  border: 1px solid var(--hairline);
+  color: var(--text);
+  font-size: .74rem;
+  line-height: 1.45;
+  white-space: normal;
+  text-align: left;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s var(--ease);
+  z-index: 5;
+  box-shadow: 0 10px 30px rgba(0,0,0,.7);
+}
+.bar:hover::after, .bar:focus-visible::after { opacity: 1; }
+
+.bar-value {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  min-width: 4.5ch;
+  text-align: right;
+}
+
+.chart-source { font-size: .75rem; color: var(--faint); margin: 1.5rem 0 0; line-height: 1.55; }
+
+@media (max-width: 640px) {
+  .bars li { grid-template-columns: 1fr auto; grid-template-areas: "label value" "track track"; gap: 6px 12px; }
+  .bar-label { grid-area: label; }
+  .bar-value { grid-area: value; }
+  .bar-track { grid-area: track; height: 16px; }
+  .bar[data-tip]::after { left: 0; transform: none; min-width: 0; max-width: 100%; }
+}

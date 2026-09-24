@@ -181,9 +181,9 @@ strings to find everything that still needs a real answer.
 
 Pulled from **DXB INTERACT** (Dubai Land Department transactions + Ejari rental contracts), re-queried live on 12 Sep 2026 for this build.
 
-Currently displayed, period **23 Jun – 10 Sep 2026**:
+Currently displayed, period **23 Jun – 18 Sep 2026** (refreshed 24 Sep):
 
-- **Citywide pulse:** 43,666 transactions · AED 1,197,119 median sale price · 162 areas tracked
+- **Citywide pulse:** 47,835 transactions · AED 1,200,000 median sale price · 165 areas tracked
 - **Busiest areas by volume:** Madinat Al Mataar (5,271), Al Barsha South Fourth (2,955), Jabal Ali First (2,260), Jabal Ali Industrial Second (2,226), Wadi Al Safa 4 (1,915)
 - **Area comparison (flats):** Dubai Marina AED 2.54M / 4.51% · Business Bay AED 1.71M / 4.92% · Downtown AED 3.00M / 5.16% · Palm Jumeirah AED 5.49M / 3.85%
 - **Top rental yields:** Al Hebiah Second (11.82%), DIP First (8.52%), Al Goze Fourth (7.26%), Al Warsan First (7.20%), Al Merkadh (6.73%), Al Kheeran (6.62%), Al Thanyah Third (6.52%), Al Yelayiss 2 (6.50%)
@@ -285,3 +285,7 @@ Serve the bare apex, not `www` — the canonical tags name `suitbro.ae`, so redi
 **21 Sep 2026** — Made the server video-capable ahead of any video being supplied: added mp4/webm/mov/ogv and audio content types, switched from reading whole files into memory to streaming them, and implemented HTTP Range (206) support. Without Range a `<video>` element cannot seek and buffers the entire file before playing. Range was verified against byte offsets, including open-ended and suffix forms, with 416 on unsatisfiable ranges.
 
 **21 Sep 2026** — Pre-launch pass. Audited all seven pages at six widths from 320 to 1920px. Found and fixed a real mobile bug: `.photo img` had `aspect-ratio` but no `height: auto`, so the `height` attribute on each `<img>` kept the CSS ratio inert and photographs rendered at full natural height inside narrow columns — over 1500px tall on a phone. Added responsive `srcset`/`sizes` with 480w and 900w variants, tightened phone crop ratios, and added `vercel.json` so the site can deploy to Vercel as static files as well as to Railway as a Node app. Overflow, oversizing, upscaling and tap-target checks all now read zero.
+
+**24 Sep 2026** — Market Insights was the only page with no visual content. It now carries four charts rather than a photograph, because the page's value is the data, not another portrait. Figures refreshed against DXB INTERACT first: 47,835 transactions (was 43,666) over 23 Jun – 18 Sep, 165 areas, and the homepage ticker and insight strip were resynced to match.
+
+Chart decisions, made by method rather than taste. Each chart is a single series, so bar length carries the magnitude and colour carries nothing — the brand gold was kept after checking it reaches 9.52:1 contrast on the chart surface, well past the 3:1 threshold for graphics. Price and yield for the four prime areas are deliberately **two separate charts**, never one chart with two axes. Yields resting on a thin sample are **hatched rather than recoloured**, so the caveat survives for colourblind readers and in print; a legend names the distinction and the tooltip spells it out. Every bar carries an aria-label and a hover/focus tooltip, and each chart keeps its full table underneath as the accessible fallback.
