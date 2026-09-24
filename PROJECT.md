@@ -74,7 +74,7 @@ Nav sits at the top of every page, current page highlighted in gold. "Book a cal
 
 ```
 .
-├── public/               ← all pages + styles.css (everything user-facing)
+├── public/               ← all pages + styles.css + app.js (everything user-facing)
 │   ├── index.html
 │   ├── about.html
 │   ├── listings.html
@@ -289,3 +289,9 @@ Serve the bare apex, not `www` — the canonical tags name `suitbro.ae`, so redi
 **24 Sep 2026** — Market Insights was the only page with no visual content. It now carries four charts rather than a photograph, because the page's value is the data, not another portrait. Figures refreshed against DXB INTERACT first: 47,835 transactions (was 43,666) over 23 Jun – 18 Sep, 165 areas, and the homepage ticker and insight strip were resynced to match.
 
 Chart decisions, made by method rather than taste. Each chart is a single series, so bar length carries the magnitude and colour carries nothing — the brand gold was kept after checking it reaches 9.52:1 contrast on the chart surface, well past the 3:1 threshold for graphics. Price and yield for the four prime areas are deliberately **two separate charts**, never one chart with two axes. Yields resting on a thin sample are **hatched rather than recoloured**, so the caveat survives for colourblind readers and in print; a legend names the distinction and the tooltip spells it out. Every bar carries an aria-label and a hover/focus tooltip, and each chart keeps its full table underneath as the accessible fallback.
+
+**24 Sep 2026** — Figures now animate. Stats count up from zero and chart bars grow in when they scroll into view, and the shared page behaviour moved out of seven duplicated inline scripts into one `public/app.js`.
+
+**What was deliberately not built: a fake live feed.** The request was for animation suggesting the figures update in real time. They do not — the data is a snapshot pulled by hand and written into the HTML. A ticking counter or a "LIVE" badge would imply a feed that does not exist, on the one page whose credibility rests entirely on the numbers being checkable. What went in instead is a count-up on reveal, which reads as motion without claiming currency, plus a freshness stamp that computes its own relative age in the browser ("Updated today", "Updated 3 weeks ago") from a date in the HTML. That is genuinely dynamic and it ages honestly — it will say "Updated 2 months ago" when that is true, which is also a useful nudge to refresh.
+
+Degradation was tested rather than assumed, in four states: normally (counts up, lands exactly on the written value), under `prefers-reduced-motion` (real values immediately, nothing animated), with the observer never firing (a six-second failsafe releases every bar), and with JavaScript disabled entirely (every figure, every full-width bar and the absolute date all present). The pre-animation state is installed by `app.js` itself rather than by the stylesheet, so a failure to load that file leaves the page correct rather than blank.

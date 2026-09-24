@@ -1317,3 +1317,31 @@ html.intro-skip .intro { animation: introOut .36s var(--ease) forwards !importan
   .bar-track { grid-area: track; height: 16px; }
   .bar[data-tip]::after { left: 0; transform: none; min-width: 0; max-width: 100%; }
 }
+
+/* Freshness stamp. Deliberately not a "live" indicator — the data is a
+   snapshot, and this says so. The relative age is computed in the browser, so
+   it tells the truth as it gets older rather than freezing at a build date. */
+.freshness {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 1.4rem 0 0;
+  padding: 7px 14px 7px 12px;
+  border: 1px solid var(--glass-edge);
+  border-radius: 100px;
+  background: var(--glass-tint);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  backdrop-filter: blur(12px) saturate(150%);
+  font-size: .7rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.freshness i {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex: none;
+}
+.freshness b { color: var(--text); font-weight: 600; }
